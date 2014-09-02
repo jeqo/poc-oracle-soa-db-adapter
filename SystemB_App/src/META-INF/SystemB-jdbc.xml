@@ -1,0 +1,24 @@
+<?xml version = '1.0' encoding = 'windows-1252'?>
+<jdbc-data-source xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://xmlns.oracle.com/weblogic/jdbc-data-source http://xmlns.oracle.com/weblogic/jdbc-data-source/1.3/jdbc-data-source.xsd"
+                  xmlns="http://xmlns.oracle.com/weblogic/jdbc-data-source">
+    <name>SystemB</name>
+    <jdbc-driver-params>
+        <url>jdbc:oracle:thin:@localhost:1521:XE</url>
+        <driver-name>oracle.jdbc.OracleDriver</driver-name>
+        <properties>
+            <property>
+                <name>user</name>
+                <value>system_b</value>
+            </property>
+        </properties>
+        <password-encrypted>4576F62D5F456FC10F8A9983B316A6B0</password-encrypted>
+    </jdbc-driver-params>
+    <jdbc-connection-pool-params>
+        <test-table-name>SQL SELECT 1 FROM DUAL</test-table-name>
+    </jdbc-connection-pool-params>
+    <jdbc-data-source-params>
+        <jndi-name>jdbc/SystemBDS</jndi-name>
+        <scope>Application</scope>
+    </jdbc-data-source-params>
+</jdbc-data-source>

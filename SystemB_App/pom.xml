@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>pe.jeqo</groupId>
+  <artifactId>systemb-service</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <build>
+    <resources>
+      <resource>
+        <directory>src/</directory>
+        <includes>
+          <include>**</include>
+        </includes>
+      </resource>
+    </resources>
+  </build>
+  <modules>
+    <module>SystemB_Service</module>
+    <module>SystemB_Repo</module>
+  </modules>
+  <dependencies>
+    <dependency>
+      <groupId>pe.jeqo</groupId>
+      <artifactId>SystemB_Service</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>pe.jeqo</groupId>
+      <artifactId>systemb-repo</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <type>jar</type>
+    </dependency>
+  </dependencies>
+</project>
