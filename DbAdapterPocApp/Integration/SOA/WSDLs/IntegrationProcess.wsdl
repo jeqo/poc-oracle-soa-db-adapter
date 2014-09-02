@@ -1,0 +1,43 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="IntegrationProcess"
+     targetNamespace="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:client="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess"
+     xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+     xmlns:ns1="http://www.integration.org/sales"
+    >
+    <plnk:partnerLinkType name="IntegrationProcess">
+        <plnk:role name="IntegrationProcessProvider" portType="client:IntegrationProcess"/>
+        <plnk:role name="IntegrationProcessRequester" portType="client:IntegrationProcessCallback"/>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:client="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess"
+             xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:ns1="http://www.integration.org/sales">
+            <import namespace="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess"
+                 schemaLocation="../Schemas/IntegrationProcess.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:client="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess"
+             xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:ns1="http://www.integration.org/sales">
+            <xsd:import namespace="http://www.integration.org/sales" schemaLocation="../Schemas/sales.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="IntegrationProcessRequestMessage">
+        <wsdl:part name="payload" element="ns1:order"/>
+    </wsdl:message>
+    <wsdl:message name="IntegrationProcessResponseMessage">
+        <wsdl:part name="payload" element="client:processResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="IntegrationProcess">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:IntegrationProcessRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:portType name="IntegrationProcessCallback">
+        <wsdl:operation name="processResponse">
+            <wsdl:input message="client:IntegrationProcessResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

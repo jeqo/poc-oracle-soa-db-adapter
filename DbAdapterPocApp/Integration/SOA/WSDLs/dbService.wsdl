@@ -1,0 +1,29 @@
+<wsdl:definitions
+     name="dbService"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbService"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbService"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:pc="http://xmlns.oracle.com/pcbpel/"
+     xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/dbService"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+  <plt:partnerLinkType name="dbService_plt" >
+    <plt:role name="dbService_role" >
+      <plt:portType name="tns:dbService_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/dbService" schemaLocation="../Schemas/dbService_table.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="SalesOrderCollection_msg">
+        <wsdl:part name="SalesOrderCollection" element="top:SalesOrderCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="dbService_ptt">
+        <wsdl:operation name="receive">
+            <wsdl:input message="tns:SalesOrderCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>
