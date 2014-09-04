@@ -25,7 +25,6 @@
    </list>
    <list n="listOfChildren">
       <hash><url n="URL" path="SystemB_Repo/SystemB_Repo.jpr"/></hash>
-      <hash><url n="URL" path="SystemB_Service/SystemB_Service.jpr"/></hash>
    </list>
    <hash n="oracle.jdeveloper.maven.compiler.MavenConfiguration">
       <hash n="oracle.jdeveloper.maven.compiler.MavenConfiguration">

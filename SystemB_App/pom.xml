@@ -16,7 +16,6 @@
     </resources>
   </build>
   <modules>
-    <module>SystemB_Service</module>
     <module>SystemB_Repo</module>
   </modules>
   <dependencies>
