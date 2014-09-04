@@ -1,0 +1,15 @@
+<adapter-config name="dbSystemB" adapter="db" wsdlLocation="../WSDLs/dbSystemB.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="xe-systemb" location="eis/DB/xe-systemb"/>
+  <endpoint-interaction portType="dbSystemB_ptt" operation="merge">
+    <interaction-spec className="oracle.tip.adapter.db.DBWriteInteractionSpec">
+      <property name="DescriptorName" value="dbSystemB.SalesOrder"/>
+      <property name="DmlType" value="merge"/>
+      <property name="MappingsMetaDataURL" value="dbSystemB-or-mappings.xml"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+      <property name="OptimizeMerge" value="true"/>
+      <property name="DetectOmissions" value="true"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

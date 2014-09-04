@@ -2,11 +2,13 @@
 <schema attributeFormDefault="unqualified"
 	elementFormDefault="qualified"
 	targetNamespace="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess"
-	xmlns="http://www.w3.org/2001/XMLSchema">
-	<element name="process">
+	xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:sales="http://www.integration.org/sales">
+ <import schemaLocation="sales.xsd" namespace="http://www.integration.org/sales"/>
+ <element name="process">
 		<complexType>
 			<sequence>
-				<element name="input" type="string"/>
+				<element name="input" type="sales:OrderType"/>
 			</sequence>
 		</complexType>
 	</element>

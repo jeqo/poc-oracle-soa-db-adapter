@@ -25,7 +25,7 @@
         </xsd:schema>
     </wsdl:types>
     <wsdl:message name="IntegrationProcessRequestMessage">
-        <wsdl:part name="payload" element="ns1:order"/>
+        <wsdl:part name="payload" element="client:process"/>
     </wsdl:message>
     <wsdl:message name="IntegrationProcessResponseMessage">
         <wsdl:part name="payload" element="client:processResponse"/>

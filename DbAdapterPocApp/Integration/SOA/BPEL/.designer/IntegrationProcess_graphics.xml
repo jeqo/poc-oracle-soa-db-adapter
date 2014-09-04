@@ -4,9 +4,10 @@
    <annotationfile/>
    <iconize/>
    <partnerlink_locations>
-      <partnerlink name="integrationprocess_client" x="0" y="187" side="left"/>
+      <partnerlink name="integrationprocess_client" x="0" y="227" side="left"/>
+      <partnerlink name="dbSystemBMediator.dbSystemBMediator" x="0" y="284" side="left"/>
    </partnerlink_locations>
-   <graph_layout viewport="0,0,1109,810" show_swimlanes="true">
+   <graph_layout viewport="0,0,1477,525" show_swimlanes="true">
       <layout_item collapsed="false" xpath="/process" type="process" showhandlers="true"/>
       <layout_item collapsed="false" xpath="/process/sequence" type="sequence"/>
    </graph_layout>

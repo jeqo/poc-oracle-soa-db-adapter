@@ -15,6 +15,12 @@
           location="WSDLs/IntegrationProcess.wsdl" importType="wsdl"/>
   <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbService"
           location="WSDLs/dbService.wsdl" importType="wsdl"/>
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbSystemB"
+          location="WSDLs/dbSystemB.wsdl" importType="wsdl"/>
+  <import namespace="http://xmlns.oracle.com/DbAdapterPocApp/Integration/dbSystemBMediator"
+          location="WSDLs/dbSystemBMediator.wsdl" importType="wsdl"/>
+  <import namespace="http://xmlns.oracle.com/DbAdapterPocApp/Integration/dbSystemBMediator"
+          location="WSDLs/dbSystemBMediatorWrapper.wsdl" importType="wsdl"/>
   <service name="integrationprocess_client_ep" ui:wsdlLocation="WSDLs/IntegrationProcess.wsdl">
     <interface.wsdl interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.interface(IntegrationProcess)"
                     callbackInterface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.interface(IntegrationProcessCallback)"/>
@@ -23,7 +29,7 @@
       <binding.ws port="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.endpoint(integrationprocess_client_ep/IntegrationProcessCallback_pt)"/>
     </callback>
   </service>
-  <service name="dbService" ui:wsdlLocation="WSDLs/dbService.wsdl">
+  <service name="dbSystemA" ui:wsdlLocation="WSDLs/dbService.wsdl">
     <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbService#wsdl.interface(dbService_ptt)"/>
     <binding.jca config="Adapters/dbService_db.jca">
       <property name="useRejectedMessageRecovery" type="xs:string" many="false" override="may">true</property>
@@ -42,10 +48,13 @@
         <interface.wsdl interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.interface(IntegrationProcess)"
                         callbackInterface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.interface(IntegrationProcessCallback)"/>
       </service>
+      <reference name="dbSystemBMediator.dbSystemBMediator" ui:wsdlLocation="WSDLs/dbSystemBMediatorWrapper.wsdl">
+        <interface.wsdl interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/dbSystemBMediator#wsdl.interface(execute_ptt)"/>
+      </reference>
     </componentType>
     <property name="bpel.config.oneWayDeliveryPolicy" type="xs:string" many="false">async.persist</property>
   </component>
-  <component name="dbMediator">
+  <component name="dbSystemAMediator">
     <implementation.mediator src="Mediators/dbMediator.mplan"/>
     <componentType>
       <service name="dbMediator" ui:wsdlLocation="WSDLs/dbService.wsdl">
@@ -57,16 +66,43 @@
       </reference>
     </componentType>
   </component>
+  <component name="dbSystemBMediator">
+    <implementation.mediator src="Mediators/dbSystemBMediator.mplan"/>
+    <componentType>
+      <service name="dbSystemBMediator" ui:wsdlLocation="WSDLs/dbSystemBMediator.wsdl">
+        <interface.wsdl interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/dbSystemBMediator#wsdl.interface(execute_ptt)"/>
+      </service>
+      <reference name="dbSystemB" ui:wsdlLocation="WSDLs/dbSystemB.wsdl">
+        <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbSystemB#wsdl.interface(dbSystemB_ptt)"/>
+      </reference>
+    </componentType>
+  </component>
+  <reference name="dbSystemB" ui:wsdlLocation="WSDLs/dbSystemB.wsdl">
+    <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbSystemB#wsdl.interface(dbSystemB_ptt)"/>
+    <binding.jca config="Adapters/dbSystemB_db.jca"/>
+    <property name="jca.retry.count" type="xs:int" many="false" override="may">4</property>
+    <property name="jca.retry.interval" type="xs:int" many="false" override="may">1</property>
+    <property name="jca.retry.backoff" type="xs:int" many="false" override="may">2</property>
+    <property name="jca.retry.maxInterval" type="xs:int" many="false" override="may">120</property>
+  </reference>
   <wire>
     <source.uri>integrationprocess_client_ep</source.uri>
     <target.uri>IntegrationProcess/integrationprocess_client</target.uri>
   </wire>
   <wire>
-    <source.uri>dbService</source.uri>
-    <target.uri>dbMediator/dbMediator</target.uri>
+    <source.uri>dbSystemA</source.uri>
+    <target.uri>dbSystemAMediator/dbMediator</target.uri>
   </wire>
   <wire>
-    <source.uri>dbMediator/IntegrationProcess.integrationprocess_client</source.uri>
+    <source.uri>dbSystemAMediator/IntegrationProcess.integrationprocess_client</source.uri>
     <target.uri>IntegrationProcess/integrationprocess_client</target.uri>
+  </wire>
+  <wire>
+    <source.uri>IntegrationProcess/dbSystemBMediator.dbSystemBMediator</source.uri>
+    <target.uri>dbSystemBMediator/dbSystemBMediator</target.uri>
+  </wire>
+  <wire>
+    <source.uri>dbSystemBMediator/dbSystemB</source.uri>
+    <target.uri>dbSystemB</target.uri>
   </wire>
 </composite>

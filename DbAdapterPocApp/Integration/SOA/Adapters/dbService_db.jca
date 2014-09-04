@@ -1,6 +1,6 @@
 <adapter-config name="dbService" adapter="db" wsdlLocation="../WSDLs/dbService.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
   
-  <connection-factory UIConnectionName="xe-integration" location="eis/DB/xe-integration"/>
+  <connection-factory UIConnectionName="xe-systema" location="eis/DB/xe-systema"/>
   <endpoint-activation portType="dbService_ptt" operation="receive">
     <activation-spec className="oracle.tip.adapter.db.DBActivationSpec">
       <property name="DescriptorName" value="dbService.SalesOrder"/>
@@ -10,7 +10,7 @@
       <property name="MarkReadColumn" value="STATUS"/>
       <property name="MarkReadValue" value="READ"/>
       <property name="MarkUnreadValue" value="UNREAD"/>
-      <property name="PollingInterval" value="20"/>
+      <property name="PollingInterval" value="10"/>
       <property name="MaxRaiseSize" value="1"/>
       <property name="MaxTransactionSize" value="10"/>
       <property name="NumberOfThreads" value="1"/>
