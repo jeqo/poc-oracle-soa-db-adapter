@@ -19,7 +19,8 @@
          xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
          xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbSystemB"
          xmlns:ns2="http://xmlns.oracle.com/DbAdapterPocApp/Integration/dbSystemBMediator"
-         xmlns:ns3="http://www.integration.org/sales">
+         xmlns:ns3="http://www.integration.org/sales"
+         xmlns:ns4="http://xmlns.oracle.com/DbAdapterPocApp/Integration/SystemBMediator">
 
     <import ui:processWSDL="true" namespace="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess" location="../WSDLs/IntegrationProcess.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <!-- 
@@ -35,8 +36,8 @@
       with the client role are automatically set using WS-Addressing.
     -->
         <partnerLink name="integrationprocess_client" partnerLinkType="client:IntegrationProcess" myRole="IntegrationProcessProvider" partnerRole="IntegrationProcessRequester"/>
-        <partnerLink name="dbSystemBMediator.dbSystemBMediator"
-                     partnerLinkType="ns2:dbSystemBMediator.dbSystemBMediator" partnerRole="execute_ptt"/>
+        <partnerLink name="SystemBMediator.SystemBMediator" partnerLinkType="ns4:SystemBMediator.SystemBMediator"
+                     partnerRole="execute_ptt"/>
     </partnerLinks>
 
     <!-- 
@@ -51,7 +52,7 @@
 
         <!-- Reference to the message that will be sent back to the requester during callback -->
         <variable name="outputVariable" messageType="client:IntegrationProcessResponseMessage"/>
-        <variable name="Invoke1_execute_InputVariable" messageType="ns2:requestMessage"/>
+        <variable name="InvokeSystemB_execute_InputVariable" messageType="ns4:requestMessage"/>
     </variables>
 
     <!-- 
@@ -67,11 +68,11 @@
         <assign name="AssignSystemBRequest">
             <copy>
                 <from>$inputVariable.payload/client:input</from>
-                <to>$Invoke1_execute_InputVariable.request</to>
+                <to>$InvokeSystemB_execute_InputVariable.request</to>
             </copy>
         </assign>
-        <invoke name="InvokeSystemB" partnerLink="dbSystemBMediator.dbSystemBMediator"
-                portType="ns2:execute_ptt" operation="execute" inputVariable="Invoke1_execute_InputVariable"
+        <invoke name="InvokeSystemB" partnerLink="SystemBMediator.SystemBMediator"
+                portType="ns4:execute_ptt" operation="execute" inputVariable="InvokeSystemB_execute_InputVariable"
                 bpelx:invokeAsDetail="no"/>
         <!-- 
           Asynchronous callback to the requester. (Note: the callback location and correlation id is transparently handled using WS-addressing.)

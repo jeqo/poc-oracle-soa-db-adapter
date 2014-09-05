@@ -21,7 +21,7 @@
         <wsdl:part name="SalesOrderCollection" element="top:SalesOrderCollection"/>
     </wsdl:message>
     <wsdl:portType name="dbSystemB_ptt">
-        <wsdl:operation name="merge">
+        <wsdl:operation name="insert">
             <wsdl:input message="tns:SalesOrderCollection_msg"/>
         </wsdl:operation>
     </wsdl:portType>

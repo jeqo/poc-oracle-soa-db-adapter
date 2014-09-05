@@ -1,16 +1,16 @@
-<adapter-config name="dbService" adapter="db" wsdlLocation="../WSDLs/dbService.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+<adapter-config name="dbSystemA" adapter="db" wsdlLocation="../WSDLs/dbSystemA.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
   
   <connection-factory UIConnectionName="xe-systema" location="eis/DB/xe-systema"/>
-  <endpoint-activation portType="dbService_ptt" operation="receive">
+  <endpoint-activation portType="dbSystemA_ptt" operation="receive">
     <activation-spec className="oracle.tip.adapter.db.DBActivationSpec">
-      <property name="DescriptorName" value="dbService.SalesOrder"/>
-      <property name="QueryName" value="dbServiceSelect"/>
-      <property name="MappingsMetaDataURL" value="dbService-or-mappings.xml"/>
+      <property name="DescriptorName" value="dbSystemA.SalesOrder"/>
+      <property name="QueryName" value="dbSystemASelect"/>
+      <property name="MappingsMetaDataURL" value="dbSystemA-or-mappings.xml"/>
       <property name="PollingStrategy" value="LogicalDeletePollingStrategy"/>
       <property name="MarkReadColumn" value="STATUS"/>
       <property name="MarkReadValue" value="READ"/>
       <property name="MarkUnreadValue" value="UNREAD"/>
-      <property name="PollingInterval" value="10"/>
+      <property name="PollingInterval" value="15"/>
       <property name="MaxRaiseSize" value="1"/>
       <property name="MaxTransactionSize" value="10"/>
       <property name="NumberOfThreads" value="1"/>

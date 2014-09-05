@@ -36,7 +36,7 @@ try:
 	cd('/JDBCSystemResources/' + dsName + '/JDBCResource/' + dsName + '/JDBCDriverParams/' + dsName + '/Properties/' + dsName + '/Properties/databaseName')
 	cmo.setValue(props.get("datasource.databasename"))
 	cd('/JDBCSystemResources/' + dsName + '/JDBCResource/' + dsName + '/JDBCDataSourceParams/' + dsName )
-	cmo.setGlobalTransactionsProtocol('OnePhaseCommit')
+	cmo.setGlobalTransactionsProtocol('LoggingLastResource')
 	cd('/SystemResources/' + dsName )
 	set('Targets',jarray.array([ObjectName('com.bea:Name=' + props.get("datasource.target") + ',Type=Server')], ObjectName))
 	save()

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <object-persistence xmlns="http://www.eclipse.org/eclipselink/xsds/persistence" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:eclipselink="http://www.eclipse.org/eclipselink/xsds/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd">
-   <name>dbService-OR</name>
+   <name>dbSystemA-OR</name>
    <class-mapping-descriptors>
       <class-mapping-descriptor xsi:type="object-relational-class-mapping-descriptor">
-         <class>dbService.SalesOrder</class>
+         <class>dbSystemA.SalesOrder</class>
          <alias>SALES_ORDER</alias>
          <primary-key>
             <field table="SALES_ORDER" name="ID" xsi:type="column"/>
@@ -11,8 +11,8 @@
          <events/>
          <querying>
             <queries>
-               <query name="dbServiceSelect" xsi:type="read-all-query">
-                  <reference-class>dbService.SalesOrder</reference-class>
+               <query name="dbSystemASelect" xsi:type="read-all-query">
+                  <reference-class>dbSystemA.SalesOrder</reference-class>
                   <lock-mode>none</lock-mode>
                   <container xsi:type="list-container-policy">
                      <collection-type>java.util.Vector</collection-type>

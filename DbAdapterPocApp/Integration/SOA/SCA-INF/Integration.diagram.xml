@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dgm:gDiagram xmlns:dgm="http://xmlns.oracle.com/sca/soadgm">
-    <dgm:gService name="integrationprocess_client_ep">
+    <dgm:gService name="SystemBMediator_ep">
+        <dgm:body borderWidth="2" arcRad="20" X="21" Y="289" width="137" height="84">
+            <dgm:borderColor r="153" g="153" b="153"/>
+            <dgm:bgColor r="255" g="255" b="255"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="11" Y="282" width="156" height="98">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:outputPort name="SystemBMediator_ep" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/SystemBMediator#wsdl.interface(execute_ptt)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="20" Y="4" width="20" height="20"/>
+        <dgm:operations>
+            <dgm:item>execute</dgm:item>
+        </dgm:operations>
+    </dgm:gService>
+    <dgm:gService name="integrationprocess_client">
         <dgm:body borderWidth="2" arcRad="20" X="21" Y="159" width="137" height="96">
             <dgm:borderColor r="153" g="153" b="153"/>
             <dgm:bgColor r="255" g="255" b="255"/>
@@ -8,7 +22,7 @@
         <dgm:shadow arcRad="20" X="11" Y="152" width="156" height="110">
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
-        <dgm:outputPort name="integrationprocess_client_ep" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.interface(IntegrationProcess)" callbackInterface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.interface(IntegrationProcessCallback)"/>
+        <dgm:outputPort name="integrationprocess_client" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.interface(IntegrationProcess)" callbackInterface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.interface(IntegrationProcessCallback)"/>
         <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/soap_service_20x20.png" X="20" Y="4" width="20" height="20"/>
         <dgm:operations>
             <dgm:item>process</dgm:item>
@@ -23,93 +37,100 @@
         <dgm:shadow arcRad="20" X="11" Y="34" width="156" height="98">
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
-        <dgm:outputPort name="dbSystemA" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbService#wsdl.interface(dbService_ptt)"/>
+        <dgm:outputPort name="dbSystemA" X="127" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbSystemA#wsdl.interface(dbSystemA_ptt)"/>
         <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="20" Y="4" width="20" height="20"/>
         <dgm:operations>
             <dgm:item>receive</dgm:item>
         </dgm:operations>
     </dgm:gService>
     <dgm:gReference name="dbSystemB">
-        <dgm:body borderWidth="2" arcRad="20" X="1268" Y="103" width="136" height="84">
+        <dgm:body borderWidth="2" arcRad="20" X="988" Y="222" width="136" height="84">
             <dgm:borderColor r="153" g="153" b="153"/>
             <dgm:bgColor r="255" g="255" b="255"/>
         </dgm:body>
-        <dgm:shadow arcRad="20" X="1258" Y="96" width="156" height="98">
+        <dgm:shadow arcRad="20" X="978" Y="215" width="156" height="98">
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:inputPort name="dbSystemB" X="-10" Y="0" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbSystemB#wsdl.interface(dbSystemB_ptt)"/>
         <dgm:nodeIcon URI="/oracle/tip/tools/ide/adapters/designtime/adapter/images/db_adapter_20x20.png" X="27" Y="4" width="20" height="20"/>
         <dgm:operations>
-            <dgm:item>merge</dgm:item>
+            <dgm:item>insert</dgm:item>
         </dgm:operations>
     </dgm:gReference>
     <dgm:gComponent name="IntegrationProcess">
-        <dgm:body borderWidth="2" arcRad="20" X="648" Y="114" width="130" height="61">
+        <dgm:body borderWidth="2" arcRad="20" X="508" Y="114" width="130" height="61">
             <dgm:borderColor r="69" g="113" b="140"/>
             <dgm:lightBgColor r="166" g="208" b="230"/>
             <dgm:darkBgColor r="99" g="162" b="201"/>
         </dgm:body>
-        <dgm:shadow arcRad="20" X="638" Y="107" width="150" height="77">
+        <dgm:shadow arcRad="20" X="498" Y="107" width="150" height="77">
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
         <dgm:inputPort name="integrationprocess_client" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.interface(IntegrationProcess)" callbackInterface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.interface(IntegrationProcessCallback)"/>
-        <dgm:outputPort name="dbSystemBMediator.dbSystemBMediator" X="120" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/dbSystemBMediator#wsdl.interface(execute_ptt)"/>
+        <dgm:outputPort name="SystemBMediator.SystemBMediator" X="120" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/SystemBMediator#wsdl.interface(execute_ptt)"/>
         <dgm:nodeIcon URI="/oracle/tip/tools/ide/bpel/shared/plugins/resources/images/soa/process_20x20.png" X="10" Y="4" width="20" height="20"/>
     </dgm:gComponent>
-    <dgm:gComponent name="dbSystemAMediator">
-        <dgm:body borderWidth="2" arcRad="20" X="338" Y="26" width="130" height="61">
+    <dgm:gComponent name="SystemBMediator">
+        <dgm:body borderWidth="2" arcRad="20" X="748" Y="207" width="130" height="61">
             <dgm:borderColor r="128" g="92" b="148"/>
             <dgm:lightBgColor r="208" g="169" b="227"/>
             <dgm:darkBgColor r="183" g="132" b="212"/>
         </dgm:body>
-        <dgm:shadow arcRad="20" X="328" Y="19" width="150" height="77">
+        <dgm:shadow arcRad="20" X="738" Y="200" width="150" height="77">
             <dgm:bgColor r="196" g="228" b="240"/>
         </dgm:shadow>
-        <dgm:inputPort name="dbMediator" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbService#wsdl.interface(dbService_ptt)"/>
-        <dgm:outputPort name="IntegrationProcess.integrationprocess_client" X="120" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.interface(IntegrationProcess)" callbackInterface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.interface(IntegrationProcessCallback)"/>
-        <dgm:nodeIcon URI="/oracle/tip/tools/ide/mediator/resource/image/mediator_20x20.png" X="10" Y="4" width="20" height="20"/>
-    </dgm:gComponent>
-    <dgm:gComponent name="dbSystemBMediator">
-        <dgm:body borderWidth="2" arcRad="20" X="958" Y="88" width="130" height="61">
-            <dgm:borderColor r="128" g="92" b="148"/>
-            <dgm:lightBgColor r="208" g="169" b="227"/>
-            <dgm:darkBgColor r="183" g="132" b="212"/>
-        </dgm:body>
-        <dgm:shadow arcRad="20" X="948" Y="81" width="150" height="77">
-            <dgm:bgColor r="196" g="228" b="240"/>
-        </dgm:shadow>
-        <dgm:inputPort name="dbSystemBMediator" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/dbSystemBMediator#wsdl.interface(execute_ptt)"/>
+        <dgm:inputPort name="SystemBMediator" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/SystemBMediator#wsdl.interface(execute_ptt)"/>
         <dgm:outputPort name="dbSystemB" X="120" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbSystemB#wsdl.interface(dbSystemB_ptt)"/>
         <dgm:nodeIcon URI="/oracle/tip/tools/ide/mediator/resource/image/mediator_20x20.png" X="10" Y="4" width="20" height="20"/>
     </dgm:gComponent>
-    <dgm:gWireLink source="integrationprocess_client_ep" target="IntegrationProcess/integrationprocess_client" width="2">
-        <dgm:gSegment X1="168" Y1="169" X2="502" Y2="169"/>
-        <dgm:gSegment X1="502" Y1="169" X2="502" Y2="139"/>
-        <dgm:gSegment X1="502" Y1="139" X2="638" Y2="139"/>
+    <dgm:gComponent name="SystemAMediator">
+        <dgm:body borderWidth="2" arcRad="20" X="268" Y="26" width="130" height="61">
+            <dgm:borderColor r="128" g="92" b="148"/>
+            <dgm:lightBgColor r="208" g="169" b="227"/>
+            <dgm:darkBgColor r="183" g="132" b="212"/>
+        </dgm:body>
+        <dgm:shadow arcRad="20" X="258" Y="19" width="150" height="77">
+            <dgm:bgColor r="196" g="228" b="240"/>
+        </dgm:shadow>
+        <dgm:inputPort name="SystemAMediator" X="-10" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbSystemA#wsdl.interface(dbSystemA_ptt)"/>
+        <dgm:outputPort name="IntegrationProcess.integrationprocess_client" X="120" Y="15" diameter="20" imageURI="oracle/tip/tools/ide/fabric/resource/image/visuals_rd1/servicereference.png" interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.interface(IntegrationProcess)" callbackInterface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.interface(IntegrationProcessCallback)"/>
+        <dgm:nodeIcon URI="/oracle/tip/tools/ide/mediator/resource/image/mediator_20x20.png" X="10" Y="4" width="20" height="20"/>
+    </dgm:gComponent>
+    <dgm:gWireLink source="SystemBMediator_ep" target="SystemBMediator/SystemBMediator" width="2">
+        <dgm:gSegment X1="168" Y1="299" X2="672" Y2="299"/>
+        <dgm:gSegment X1="672" Y1="299" X2="672" Y2="232"/>
+        <dgm:gSegment X1="672" Y1="232" X2="738" Y2="232"/>
         <dgm:baseColor r="153" g="153" b="153"/>
         <dgm:selectedColor r="49" g="106" b="196"/>
     </dgm:gWireLink>
-    <dgm:gWireLink source="dbSystemA" target="dbSystemAMediator/dbMediator" width="2">
-        <dgm:gSegment X1="168" Y1="51" X2="328" Y2="51"/>
+    <dgm:gWireLink source="SystemBMediator/dbSystemB" target="dbSystemB" width="2">
+        <dgm:gSegment X1="888" Y1="232" X2="978" Y2="232"/>
         <dgm:baseColor r="153" g="153" b="153"/>
         <dgm:selectedColor r="49" g="106" b="196"/>
     </dgm:gWireLink>
-    <dgm:gWireLink source="dbSystemAMediator/IntegrationProcess.integrationprocess_client" target="IntegrationProcess/integrationprocess_client" width="2">
-        <dgm:gSegment X1="478" Y1="51" X2="517" Y2="51"/>
-        <dgm:gSegment X1="517" Y1="51" X2="517" Y2="139"/>
-        <dgm:gSegment X1="517" Y1="139" X2="638" Y2="139"/>
+    <dgm:gWireLink source="IntegrationProcess/SystemBMediator.SystemBMediator" target="SystemBMediator/SystemBMediator" width="2">
+        <dgm:gSegment X1="648" Y1="139" X2="687" Y2="139"/>
+        <dgm:gSegment X1="687" Y1="139" X2="687" Y2="232"/>
+        <dgm:gSegment X1="687" Y1="232" X2="738" Y2="232"/>
         <dgm:baseColor r="153" g="153" b="153"/>
         <dgm:selectedColor r="49" g="106" b="196"/>
     </dgm:gWireLink>
-    <dgm:gWireLink source="IntegrationProcess/dbSystemBMediator.dbSystemBMediator" target="dbSystemBMediator/dbSystemBMediator" width="2">
-        <dgm:gSegment X1="788" Y1="139" X2="812" Y2="139"/>
-        <dgm:gSegment X1="812" Y1="139" X2="812" Y2="113"/>
-        <dgm:gSegment X1="812" Y1="113" X2="948" Y2="113"/>
+    <dgm:gWireLink source="integrationprocess_client" target="IntegrationProcess/integrationprocess_client" width="2">
+        <dgm:gSegment X1="168" Y1="169" X2="432" Y2="169"/>
+        <dgm:gSegment X1="432" Y1="169" X2="432" Y2="139"/>
+        <dgm:gSegment X1="432" Y1="139" X2="498" Y2="139"/>
         <dgm:baseColor r="153" g="153" b="153"/>
         <dgm:selectedColor r="49" g="106" b="196"/>
     </dgm:gWireLink>
-    <dgm:gWireLink source="dbSystemBMediator/dbSystemB" target="dbSystemB" width="2">
-        <dgm:gSegment X1="1098" Y1="113" X2="1258" Y2="113"/>
+    <dgm:gWireLink source="dbSystemA" target="SystemAMediator/SystemAMediator" width="2">
+        <dgm:gSegment X1="168" Y1="51" X2="258" Y2="51"/>
+        <dgm:baseColor r="153" g="153" b="153"/>
+        <dgm:selectedColor r="49" g="106" b="196"/>
+    </dgm:gWireLink>
+    <dgm:gWireLink source="SystemAMediator/IntegrationProcess.integrationprocess_client" target="IntegrationProcess/integrationprocess_client" width="2">
+        <dgm:gSegment X1="408" Y1="51" X2="447" Y2="51"/>
+        <dgm:gSegment X1="447" Y1="51" X2="447" Y2="139"/>
+        <dgm:gSegment X1="447" Y1="139" X2="498" Y2="139"/>
         <dgm:baseColor r="153" g="153" b="153"/>
         <dgm:selectedColor r="49" g="106" b="196"/>
     </dgm:gWireLink>

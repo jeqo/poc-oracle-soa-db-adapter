@@ -13,25 +13,29 @@
            xmlns:sca-ext="http://xmlns.oracle.com/sca/1.0-ext">
   <import namespace="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess"
           location="WSDLs/IntegrationProcess.wsdl" importType="wsdl"/>
-  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbService"
-          location="WSDLs/dbService.wsdl" importType="wsdl"/>
   <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbSystemB"
           location="WSDLs/dbSystemB.wsdl" importType="wsdl"/>
-  <import namespace="http://xmlns.oracle.com/DbAdapterPocApp/Integration/dbSystemBMediator"
-          location="WSDLs/dbSystemBMediator.wsdl" importType="wsdl"/>
-  <import namespace="http://xmlns.oracle.com/DbAdapterPocApp/Integration/dbSystemBMediator"
-          location="WSDLs/dbSystemBMediatorWrapper.wsdl" importType="wsdl"/>
-  <service name="integrationprocess_client_ep" ui:wsdlLocation="WSDLs/IntegrationProcess.wsdl">
+  <import namespace="http://xmlns.oracle.com/DbAdapterPocApp/Integration/SystemBMediator"
+          location="WSDLs/SystemBMediator.wsdl" importType="wsdl"/>
+  <import namespace="http://xmlns.oracle.com/DbAdapterPocApp/Integration/SystemBMediator"
+          location="WSDLs/SystemBMediatorWrapper.wsdl" importType="wsdl"/>
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbSystemA"
+          location="WSDLs/dbSystemA.wsdl" importType="wsdl"/>
+  <service name="SystemBMediator_ep" ui:wsdlLocation="WSDLs/SystemBMediator.wsdl">
+    <interface.wsdl interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/SystemBMediator#wsdl.interface(execute_ptt)"/>
+    <binding.ws port="http://xmlns.oracle.com/DbAdapterPocApp/Integration/SystemBMediator#wsdl.endpoint(SystemBMediator_ep/execute_pt)"/>
+  </service>
+  <service name="integrationprocess_client" ui:wsdlLocation="WSDLs/IntegrationProcess.wsdl">
     <interface.wsdl interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.interface(IntegrationProcess)"
                     callbackInterface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.interface(IntegrationProcessCallback)"/>
-    <binding.ws port="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.endpoint(integrationprocess_client_ep/IntegrationProcess_pt)"/>
+    <binding.ws port="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.endpoint(integrationprocess_client/IntegrationProcess_pt)"/>
     <callback>
-      <binding.ws port="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.endpoint(integrationprocess_client_ep/IntegrationProcessCallback_pt)"/>
+      <binding.ws port="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.endpoint(integrationprocess_client/IntegrationProcessCallback_pt)"/>
     </callback>
   </service>
-  <service name="dbSystemA" ui:wsdlLocation="WSDLs/dbService.wsdl">
-    <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbService#wsdl.interface(dbService_ptt)"/>
-    <binding.jca config="Adapters/dbService_db.jca">
+  <service name="dbSystemA" ui:wsdlLocation="WSDLs/dbSystemA.wsdl">
+    <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbSystemA#wsdl.interface(dbSystemA_ptt)"/>
+    <binding.jca config="Adapters/dbSystemA_db.jca">
       <property name="useRejectedMessageRecovery" type="xs:string" many="false" override="may">true</property>
     </binding.jca>
     <property name="jca.retry.count" type="xs:int" many="false" override="may">2147483647</property>
@@ -48,32 +52,32 @@
         <interface.wsdl interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.interface(IntegrationProcess)"
                         callbackInterface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.interface(IntegrationProcessCallback)"/>
       </service>
-      <reference name="dbSystemBMediator.dbSystemBMediator" ui:wsdlLocation="WSDLs/dbSystemBMediatorWrapper.wsdl">
-        <interface.wsdl interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/dbSystemBMediator#wsdl.interface(execute_ptt)"/>
+      <reference name="SystemBMediator.SystemBMediator" ui:wsdlLocation="WSDLs/SystemBMediatorWrapper.wsdl">
+        <interface.wsdl interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/SystemBMediator#wsdl.interface(execute_ptt)"/>
       </reference>
     </componentType>
     <property name="bpel.config.oneWayDeliveryPolicy" type="xs:string" many="false">async.persist</property>
   </component>
-  <component name="dbSystemAMediator">
-    <implementation.mediator src="Mediators/dbMediator.mplan"/>
+  <component name="SystemBMediator">
+    <implementation.mediator src="Mediators/SystemBMediator.mplan"/>
     <componentType>
-      <service name="dbMediator" ui:wsdlLocation="WSDLs/dbService.wsdl">
-        <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbService#wsdl.interface(dbService_ptt)"/>
+      <service name="SystemBMediator" ui:wsdlLocation="WSDLs/SystemBMediator.wsdl">
+        <interface.wsdl interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/SystemBMediator#wsdl.interface(execute_ptt)"/>
+      </service>
+      <reference name="dbSystemB" ui:wsdlLocation="WSDLs/dbSystemB.wsdl">
+        <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbSystemB#wsdl.interface(dbSystemB_ptt)"/>
+      </reference>
+    </componentType>
+  </component>
+  <component name="SystemAMediator">
+    <implementation.mediator src="Mediators/SystemAMediator.mplan"/>
+    <componentType>
+      <service name="SystemAMediator" ui:wsdlLocation="WSDLs/dbSystemA.wsdl">
+        <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbSystemA#wsdl.interface(dbSystemA_ptt)"/>
       </service>
       <reference name="IntegrationProcess.integrationprocess_client" ui:wsdlLocation="WSDLs/IntegrationProcess.wsdl">
         <interface.wsdl interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.interface(IntegrationProcess)"
                         callbackInterface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/IntegrationProcess#wsdl.interface(IntegrationProcessCallback)"/>
-      </reference>
-    </componentType>
-  </component>
-  <component name="dbSystemBMediator">
-    <implementation.mediator src="Mediators/dbSystemBMediator.mplan"/>
-    <componentType>
-      <service name="dbSystemBMediator" ui:wsdlLocation="WSDLs/dbSystemBMediator.wsdl">
-        <interface.wsdl interface="http://xmlns.oracle.com/DbAdapterPocApp/Integration/dbSystemBMediator#wsdl.interface(execute_ptt)"/>
-      </service>
-      <reference name="dbSystemB" ui:wsdlLocation="WSDLs/dbSystemB.wsdl">
-        <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/db/DbAdapterPocApp/Integration/dbSystemB#wsdl.interface(dbSystemB_ptt)"/>
       </reference>
     </componentType>
   </component>
@@ -86,23 +90,27 @@
     <property name="jca.retry.maxInterval" type="xs:int" many="false" override="may">120</property>
   </reference>
   <wire>
-    <source.uri>integrationprocess_client_ep</source.uri>
+    <source.uri>SystemBMediator_ep</source.uri>
+    <target.uri>SystemBMediator/SystemBMediator</target.uri>
+  </wire>
+  <wire>
+    <source.uri>SystemBMediator/dbSystemB</source.uri>
+    <target.uri>dbSystemB</target.uri>
+  </wire>
+  <wire>
+    <source.uri>IntegrationProcess/SystemBMediator.SystemBMediator</source.uri>
+    <target.uri>SystemBMediator/SystemBMediator</target.uri>
+  </wire>
+  <wire>
+    <source.uri>integrationprocess_client</source.uri>
     <target.uri>IntegrationProcess/integrationprocess_client</target.uri>
   </wire>
   <wire>
     <source.uri>dbSystemA</source.uri>
-    <target.uri>dbSystemAMediator/dbMediator</target.uri>
+    <target.uri>SystemAMediator/SystemAMediator</target.uri>
   </wire>
   <wire>
-    <source.uri>dbSystemAMediator/IntegrationProcess.integrationprocess_client</source.uri>
+    <source.uri>SystemAMediator/IntegrationProcess.integrationprocess_client</source.uri>
     <target.uri>IntegrationProcess/integrationprocess_client</target.uri>
-  </wire>
-  <wire>
-    <source.uri>IntegrationProcess/dbSystemBMediator.dbSystemBMediator</source.uri>
-    <target.uri>dbSystemBMediator/dbSystemBMediator</target.uri>
-  </wire>
-  <wire>
-    <source.uri>dbSystemBMediator/dbSystemB</source.uri>
-    <target.uri>dbSystemB</target.uri>
   </wire>
 </composite>
